@@ -40,7 +40,7 @@ class MongodbModelCache
      * @param array $data
      * @return int
      */
-    public static function insertOneGetId(stirng $collName, array $data): bool
+    public static function insertOneGetId(string $collName, array $data): bool
     {
         $conn = (new MongodbModelCache())->mongoConn;
         $result = $conn->insert($collName, $data);
@@ -56,7 +56,7 @@ class MongodbModelCache
      * ]
      * @return bool
      */
-    public static function insertMore(stirng $collName, array $data): bool
+    public static function insertMore(string $collName, array $data): bool
     {
         $conn = (new MongodbModelCache())->mongoConn;
         $result = $conn->insertAll($collName, $data);
