@@ -26,8 +26,8 @@ class MongodbModelCache
 
     protected $mongoConn;
 
-    const  REDIS_LIST = "mongo:list:";
-    const  REDIS_INFO = "mongo:info:";
+    protected static $redisList = "mongo:list:";
+    protected static $redisInfo = "mongo:info:";
 
     public function __construct()
     {
