@@ -3,7 +3,6 @@
 namespace Fengdangxing\MongodbModelCache;
 
 use GiocoPlus\Mongodb\MongoDb;
-use Hyperf\Contract\ConfigInterface;
 
 /**
  * @Notes: 事列
@@ -15,6 +14,6 @@ class UserModel extends MongodbModelCache
 {
     public function add()
     {
-        return self::insertOneGetId();
+        return self::insertOneGetId('test', ['id' => 1]);
     }
 }

@@ -8,7 +8,6 @@ use Hyperf\Contract\ConfigInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Utils\Codec\Json;
 use GiocoPlus\Mongodb\MongoDb;
-use phpDocumentor\Reflection\Types\Array_;
 
 class MongodbModelCache
 {
