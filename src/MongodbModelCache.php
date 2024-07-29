@@ -104,7 +104,7 @@ class MongodbModelCache
     public static function getRow(string $collName, array $filter, array $options, bool $cache = true): array
     {
         $options['limit'] = 1;
-        return self::getRedis(static::$redisInfo, __FUNCTION__, $params, $where, $cache, $builder);
+        return self::getRedis(self::$redisInfo, __FUNCTION__, $params, $where, $cache, $builder);
     }
 
     /**
@@ -116,7 +116,7 @@ class MongodbModelCache
      */
     public static function getCount(string $collName, array $filter, bool $cache = true): int
     {
-        return self::getRedis(static::$redisInfo, __FUNCTION__, $collName, $filter, [], 0, 0, $cache);
+        return self::getRedis(self::$redisInfo, __FUNCTION__, $collName, $filter, [], 0, 0, $cache);
     }
 
     /**
@@ -132,7 +132,7 @@ class MongodbModelCache
      */
     public static function getPageList(string $collName, array $filter, array $options, int $page = 1, int $limit = 10)
     {
-        return self::getRedis(static::$redisList, __FUNCTION__, $collName, $filter, $options, $limit, $page, true);
+        return self::getRedis(self::$redisList, __FUNCTION__, $collName, $filter, $options, $limit, $page, true);
     }
 
     /**
@@ -149,7 +149,7 @@ class MongodbModelCache
      */
     public static function getAllList(string $collName, array $filter, array $options, bool $cache = true)
     {
-        return self::getRedis(static::$redisList, __FUNCTION__, $collName, $filter, $options, 0, 0, $cache);
+        return self::getRedis(self::$redisList, __FUNCTION__, $collName, $filter, $options, 0, 0, $cache);
     }
 
     /**
@@ -169,14 +169,14 @@ class MongodbModelCache
      */
     public static function command(string $collName, array $cmd)
     {
-        return self::getRedis(static::$redisList, __FUNCTION__, $collName, $cmd, [], 0, 0, $cache);
+        return self::getRedis(self::$redisList, __FUNCTION__, $collName, $cmd, [], 0, 0, $cache);
     }
 
     public static function delRedis($isTrue = false)
     {
-        RedisHelper::init()->del(static::$redisList);
-        RedisHelper::init()->del(static::$redisInfo);
-        if ($isTrue) {
+        RedisHelper::init()->del(self::$redisList);
+        RedisHelper::init()->del(self::$redisInfo);
+        if ($isTrue && method_exists(static::class, 'hasDelRedis')) {
             call_user_func("static::hasDelRedis");
         }
     }
