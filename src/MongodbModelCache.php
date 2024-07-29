@@ -38,9 +38,9 @@ class MongodbModelCache
     /**
      * @Notes:插入一行
      * @param array $data
-     * @return int
+     * @return bool|string
      */
-    public static function insertOneGetId(string $collName, array $data): bool
+    public static function insertOneGetId(string $collName, array $data)
     {
         $conn = (new MongodbModelCache())->mongoConn;
         $result = $conn->insert($collName, $data);
@@ -54,9 +54,9 @@ class MongodbModelCache
      * ['email' => 'taylor@example.com', 'votes' => 0],
      * ['email' => 'dayle@example.com', 'votes' => 0]
      * ]
-     * @return bool
+     * @return bool | string
      */
-    public static function insertMore(string $collName, array $data): bool
+    public static function insertMore(string $collName, array $data)
     {
         $conn = (new MongodbModelCache())->mongoConn;
         $result = $conn->insertAll($collName, $data);
@@ -70,7 +70,7 @@ class MongodbModelCache
      * @param array $update ['field'=>'value','field'=>'value','field'=>'value']
      * @return int
      */
-    public static function updateInfo(string $collName, array $filter = [], array $update = []): int
+    public static function updateInfo(string $collName, array $filter = [], array $update = []): bool
     {
         $conn = (new MongodbModelCache())->mongoConn;
         $result = $conn->updateRow($collName, $filter, $update);
