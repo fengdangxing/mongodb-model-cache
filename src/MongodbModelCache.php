@@ -8,6 +8,7 @@ use Hyperf\Contract\ConfigInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Utils\Codec\Json;
 use GiocoPlus\Mongodb\MongoDb;
+use Hyperf\Di\Annotation\Inject;
 
 class MongodbModelCache
 {
