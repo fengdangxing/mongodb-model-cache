@@ -176,7 +176,7 @@ class MongodbModelCache
     {
         RedisHelper::init()->del(self::$redisList);
         RedisHelper::init()->del(self::$redisInfo);
-        if ($isTrue && method_exists(static::class, 'hasDelRedis')) {
+        if ($isTrue && method_exists(static::class, 'hasMongodbDelRedis')) {
             call_user_func("static::hasMongodbDelRedis", $collName);
         }
     }
