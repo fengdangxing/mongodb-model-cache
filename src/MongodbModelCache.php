@@ -104,7 +104,7 @@ class MongodbModelCache
     public static function getRow(string $collName, array $filter, array $options, bool $cache = true): array
     {
         $options['limit'] = 1;
-        return self::getRedis(self::$redisInfo, __FUNCTION__, $params, $where, $cache, $builder);
+        return self::getRedis(self::$redisInfo, __FUNCTION__, $collName, $filter, $options, 0, 0, $cache);
     }
 
     /**
