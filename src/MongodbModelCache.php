@@ -44,7 +44,7 @@ class MongodbModelCache
     {
         $conn = (new MongodbModelCache())->mongoConn;
         $result = $conn->insert($collName, $data);
-        self::delRedis($collName,true);
+        self::delRedis($collName, true);
         return $result;
     }
 
@@ -197,7 +197,7 @@ class MongodbModelCache
     {
         $ret = [];
         $key = $key . $collName;
-        $hKey = md5($collName . Json::encode($options) . Json::encode($filter) . $mod);
+        $hKey = md5($collName . Json::encode($options) . Json::encode($filter) . $mod . $limit . $page);
         if (RedisHelper::init()->hExists($key, $hKey) && $cache) {
             $retJson = RedisHelper::init()->hGet($key, $hKey);
             $ret = Json::decode($retJson, true);
