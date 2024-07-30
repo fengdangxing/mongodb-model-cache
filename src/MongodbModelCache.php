@@ -208,8 +208,7 @@ class MongodbModelCache
                     $ret = $conn->fetchAll($collName, $filter, $options);
                     break;
                 case 'getPageList':
-                    $pageSize = ($page - 1) * $limit;
-                    $ret = $conn->fetchPagination($collName, $limit, $pageSize, $filter, $options);
+                    $ret = $conn->fetchPagination($collName, $limit, $page, $filter, $options);
                     break;
                 case 'command':
                     $ret = $conn->command($collName, $filter);
