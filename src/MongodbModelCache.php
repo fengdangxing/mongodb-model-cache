@@ -44,7 +44,7 @@ class MongodbModelCache
     {
         $conn = (new MongodbModelCache())->mongoConn;
         $result = $conn->insert($collName, $data);
-        self::delRedis(true);
+        self::delRedis($collName,true);
         return $result;
     }
 
@@ -60,7 +60,7 @@ class MongodbModelCache
     {
         $conn = (new MongodbModelCache())->mongoConn;
         $result = $conn->insertAll($collName, $data);
-        self::delRedis(true);
+        self::delRedis($collName, true);
         return $result;
     }
 
@@ -74,7 +74,7 @@ class MongodbModelCache
     {
         $conn = (new MongodbModelCache())->mongoConn;
         $result = $conn->updateRow($collName, $filter, $update);
-        self::delRedis(true);
+        self::delRedis($collName, true);
         return $result;
     }
 
@@ -86,7 +86,7 @@ class MongodbModelCache
     {
         $conn = (new MongodbModelCache())->mongoConn;
         $result = $conn->delete($collName, $filter, $limit);
-        self::delRedis(true);
+        self::delRedis($collName, true);
         return $result;
     }
 
@@ -172,12 +172,12 @@ class MongodbModelCache
         return self::getRedis(self::$redisList, __FUNCTION__, $collName, $cmd, [], 0, 0, $cache);
     }
 
-    public static function delRedis($isTrue = false)
+    public static function delRedis(string $collName, $isTrue = false)
     {
         RedisHelper::init()->del(self::$redisList);
         RedisHelper::init()->del(self::$redisInfo);
         if ($isTrue && method_exists(static::class, 'hasDelRedis')) {
-            call_user_func("static::hasDelRedis");
+            call_user_func("static::hasMongodbDelRedis", $collName);
         }
     }
 
@@ -196,7 +196,7 @@ class MongodbModelCache
     private static function getRedis(string $key, string $mod, string $collName, $filter, $options, $limit, $page, $cache)
     {
         $ret = [];
-
+        $key = $key . $collName;
         $hKey = md5($collName . Json::encode($options) . Json::encode($filter) . $mod);
         if (RedisHelper::init()->hExists($key, $hKey) && $cache) {
             $retJson = RedisHelper::init()->hGet($key, $hKey);

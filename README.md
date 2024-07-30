@@ -75,6 +75,11 @@ use GiocoPlus\Mongodb\MongoDb;
  */
 class UserModel extends MongodbModelCache
 {
+    //回调
+    public function hasMongodbDelRedis($collName){
+        //UserModel::delRedis($collName);
+    }
+   
     public function add()
     {
         return self::insertOneGetId('test', ['id' => 1]);
