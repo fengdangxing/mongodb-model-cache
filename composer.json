@@ -1,10 +1,12 @@
 {
-    "name": "fengdangxing/php-aes",
-    "description": "hyperf-php-aes",
+    "name": "fengdangxing/hyperf-mongodb-model-cache",
+    "description": "hyperf-mongodb model cache",
     "keywords": [
-        "aes",
-        "php",
-        "hyperf",
+        "hyperf-mongodb",
+        "mongodb",
+        "cache",
+        "redis",
+        "hyperf"
     ],
     "license": "MIT",
     "minimum-stability": "dev",
@@ -29,7 +31,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Fengdangxing\\Aes\\": "src"
+            "Fengdangxing\\MongodbModelCache\\": "src"
         }
     }
 }
